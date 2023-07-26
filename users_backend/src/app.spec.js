@@ -32,6 +32,7 @@ describe('User management API',()=>{
         test('Endpoint for listing all users       (GET /users)',async()=>{
             //Create a user
             await repository.create({
+                userId:555,
                 name:"Artur Correa",
                 email:'accorrea@gmail.com',
                 password:'123456'
@@ -43,6 +44,7 @@ describe('User management API',()=>{
             expect(response.statusCode).toBe(200);
             expect(response.body.length).toBe(1);
             expect(response.body[0]).toStrictEqual(expect.objectContaining({
+                userId:555,
                 name:"Artur Correa",
                 email:'accorrea@gmail.com',
                 password:'123456'
@@ -52,6 +54,7 @@ describe('User management API',()=>{
         test('Endpoint for creating new user       (POST /users)',async()=>{
             
             const user = {
+                userId:555,
                 name:"Artur Correa",
                 email:'accorrea@gmail.com',
                 password:'123456'
@@ -71,6 +74,7 @@ describe('User management API',()=>{
             test('Must return 200 for an existing user',async()=>{
                 //1. Create a user
                 const user = await repository.create({
+                    userId:555,
                     name:"Artur Correa",
                     email:'accorrea@gmail.com',
                     password:'123456'
@@ -83,6 +87,7 @@ describe('User management API',()=>{
                 expect(response.statusCode).toBe(200);
                 //4. Check the body
                 expect(response.body).toStrictEqual(expect.objectContaining({
+                    userId:555,
                     name:"Artur Correa",
                     email:'accorrea@gmail.com',
                     password:'123456'
@@ -108,6 +113,7 @@ describe('User management API',()=>{
             test('Must return 200 for an existing user',async()=>{
                 //1. Create a user
                 const user = await repository.create({
+                    userId:555,
                     name:"Artur Correa",
                     email:'accorrea@gmail.com',
                     password:'123456'
@@ -115,6 +121,7 @@ describe('User management API',()=>{
                 //2. Request user update and check the headers
                 const response = await request.put(`/users/${user._id}`)
                     .send({
+                        userId:86,
                         name:"Adriana Carneiro",
                         email:'acarneiro@gmail.com',
                         password:'password'
@@ -124,6 +131,7 @@ describe('User management API',()=>{
                 expect(response.statusCode).toBe(200);
                 //4. Check the body
                 expect(response.body).toStrictEqual(expect.objectContaining({
+                    userId:86,
                     name:"Adriana Carneiro",
                     email:'acarneiro@gmail.com',
                     password:'password'
@@ -131,6 +139,7 @@ describe('User management API',()=>{
                 //5. Check if the user was updated
                 const newUser = await repository.findById(user._id);
                 expect(newUser).toStrictEqual(expect.objectContaining({
+                    userId:86,
                     name:"Adriana Carneiro",
                     email:'acarneiro@gmail.com',
                     password:'password'
@@ -141,6 +150,7 @@ describe('User management API',()=>{
                 const response = await request
                     .put('/users/649b7a272150835d525b7335')
                     .send({
+                        userId:555,
                         name:"Artur Correa",
                         email:'accorrea@gmail.com',
                         password:'123456'
@@ -160,6 +170,7 @@ describe('User management API',()=>{
             test('Must return 204 for an existing user',async()=>{
                 //1. Create a user
                 const user = await repository.create({
+                    userId:555,
                     name:"Artur Correa",
                     email:'accorrea@gmail.com',
                     password:'123456'

@@ -27,6 +27,7 @@ describe("UserRepository",()=>{
     test('Repository must create a new user (C)', async ()=>{
 
         const result = await repository.create({
+            userId:555,
             name:"Artur Correa",
             email:'accorrea@gmail.com',
             password:'123456'
@@ -35,6 +36,7 @@ describe("UserRepository",()=>{
         //Check results
         expect(result).toStrictEqual(
             expect.objectContaining({
+                userId:555,
                 name:"Artur Correa",
                 email:'accorrea@gmail.com',
                 password:'123456'
@@ -51,6 +53,7 @@ describe("UserRepository",()=>{
     test('Repository must list all users (R)', async () => {
 
         await repository.create({
+            userId:555,
             name:"Artur Correa",
             email:'accorrea@gmail.com',
             password:'123456'
@@ -62,6 +65,7 @@ describe("UserRepository",()=>{
 
         expect(result[0]).toStrictEqual(
             expect.objectContaining({
+                userId:555,
                 name:"Artur Correa",
                 email:'accorrea@gmail.com',
                 password:'123456'
@@ -73,11 +77,13 @@ describe("UserRepository",()=>{
         //1. Database must be empty (ok)
         //2. Insert a user
         const user = await repository.create({
+            userId:555,
             name:"Artur Correa",
             email:'accorrea@gmail.com',
             password:'123456'
         });
         //3. update the user
+        user.userId = 42,
         user.name = 'Antony Smith';
         user.email = 'asmith@gmail.com';
         user.password = 'password';
@@ -85,6 +91,7 @@ describe("UserRepository",()=>{
         //4. check if the user was updated on the database
         const result = await repository.findById(user._id);
         expect(result).toStrictEqual(expect.objectContaining({
+            userId:42,
             name: 'Antony Smith',
             email: 'asmith@gmail.com',
             password: 'password'
@@ -95,6 +102,7 @@ describe("UserRepository",()=>{
         //1. database must be empty. (ok)
         //2. The database must contain a user
         const user = await repository.create({
+            userId:555,
             name:"Artur Correa",
             email:'accorrea@gmail.com',
             password:'123456'
