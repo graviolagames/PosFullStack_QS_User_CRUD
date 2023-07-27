@@ -1,9 +1,12 @@
 const UserRepository = require("./user_repository");
 const {MongoClient} = require('mongodb');
-
+const cors = require('cors');
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(cors({
+    exposedHeaders:['x-total-count'],
+}));
 const dsn = 'mongodb://root:root@localhost?retryWrites=true&writeConcern=majority' 
 client = new MongoClient(dsn);
 
@@ -15,7 +18,7 @@ app.get('/users',async(request,response)=>{
 
     const users = await repository.findAll();
     await client.close();
-    
+    response.set('X-total-Count',users.lenght);
     response.json(users);
 });
 
