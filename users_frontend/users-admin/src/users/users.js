@@ -14,19 +14,21 @@ export const UserList = (data) => (
 export const UserEdit = () => (
     <Edit>
         <SimpleForm>
+            <TextInput source="userId" />
             <TextInput source="name" />
             <TextInput source="email" />
             <TextInput source="password" />
         </SimpleForm>
     </Edit>
 );
-/*
-export const EventCreate = () => (
+
+export const UserCreate = () => (
     <Create>
         <SimpleForm>
+        <TextInput source="userId" />
             <TextInput source="name" />
-            <TextInput source="date" />
+            <TextInput source="email" />
+            <TextInput source="password" />
         </SimpleForm>
     </Create>
 );
-*/

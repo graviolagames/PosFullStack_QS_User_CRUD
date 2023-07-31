@@ -38,7 +38,7 @@ app.post('/users',async(request,response)=>{
     repository = new UserRepository(collection);
     try{
         const user = await repository.create(request.body);
-        response.status(201).json(user);
+        response.status(201).json(normalizePk(user));
     }catch(e){
         response.status(500).json({error:e.message});
     }
@@ -82,7 +82,7 @@ app.put('/users/:id',async(request,response)=>{
         })}else{
         const newUser = {...user,...request.body};
         await repository.update(newUser);
-        response.json(newUser);
+        response.json(normalizePk(newUser));
     }
 
     await client.close();
