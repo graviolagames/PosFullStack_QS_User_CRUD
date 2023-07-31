@@ -88,6 +88,15 @@ app.put('/users/:id',async(request,response)=>{
     await client.close();
 })
 
+app.delete('/users',async(request,response)=>{
+    await client.connect();
+    const collection = client.db('app_db').collection('users');
+    repository = new UserRepository(collection);
+    const user = await repository.deleteAll();
+    response.sendStatus(204);
+    await client.close();
+});
+
 app.delete('/users/:id',async(request,response)=>{
     await client.connect();
     const collection = client.db('app_db').collection('users');

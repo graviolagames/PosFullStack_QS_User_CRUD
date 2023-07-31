@@ -17,6 +17,7 @@
     "supertest": "^6.3.3"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "cypress": "^12.17.2"
   }
 }
