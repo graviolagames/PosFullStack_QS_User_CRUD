@@ -5,8 +5,8 @@ export const UserList = (data) => (
         <Datagrid data={data.data} rowClick="edit">
             <TextField source="userId" />
             <TextField source="name" />
-            <DateField source="email" />
-            <DateField source="password" />
+            <TextField source="email" />
+            <TextField source="password" />
         </Datagrid>
     </List>
 );

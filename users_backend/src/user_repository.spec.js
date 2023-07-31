@@ -46,7 +46,14 @@ describe("UserRepository",()=>{
         //Check if the new user was really persisted
         const users = await repository.findAll();
         expect(users.length).toBe(1);
-
+        expect(users[0]).toStrictEqual(
+            expect.objectContaining({
+                userId:555,
+                name:"Artur Correa",
+                email:'accorrea@gmail.com',
+                password:'123456'
+            })
+        );
 
     });
 

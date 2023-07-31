@@ -2,6 +2,7 @@ const UserRepository = require("./user_repository");
 const {MongoClient} = require('mongodb');
 const cors = require('cors');
 const express = require('express');
+const { debug } = require("console");
 const app = express();
 app.use(express.json());
 app.use(cors({
@@ -16,7 +17,12 @@ app.get('/users',async(request,response)=>{
     const collection = client.db('app_db').collection('users');
     repository = new UserRepository(collection);
 
-    const users = await repository.findAll();
+    const users = (await repository.findAll()).map(usr=>{
+        usr.id = usr._id;
+        delete usr._id;
+        return usr;
+    });
+
     await client.close();
     response.set('X-total-Count',users.lenght);
     response.json(users);
@@ -27,7 +33,6 @@ app.post('/users',async(request,response)=>{
     await client.connect();
     const collection = client.db('app_db').collection('users');
     repository = new UserRepository(collection);
-    
     try{
         const user = await repository.create(request.body);
         response.status(201).json(user);
