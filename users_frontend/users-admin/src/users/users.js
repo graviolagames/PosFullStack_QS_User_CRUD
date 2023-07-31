@@ -10,16 +10,17 @@ export const UserList = (data) => (
         </Datagrid>
     </List>
 );
-/*
-export const EventEdit = () => (
+
+export const UserEdit = () => (
     <Edit>
         <SimpleForm>
             <TextInput source="name" />
-            <TextInput source="date" />
+            <TextInput source="email" />
+            <TextInput source="password" />
         </SimpleForm>
     </Edit>
 );
-
+/*
 export const EventCreate = () => (
     <Create>
         <SimpleForm>
